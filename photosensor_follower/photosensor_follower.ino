@@ -52,10 +52,6 @@ void find_direction(float sensorValue1, float sensorValue2){
 }
 
 
-void move_car(char direction){
-	Serial.println(direction);
-
-}
 
 
 
