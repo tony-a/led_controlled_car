@@ -1,7 +1,7 @@
 // tonys_motor.ino
 // based on: http://arduino.cc/en/Hacking/LibraryTutorial
 
-#include <tonys_motor.h>
+#include <Motor.h>
 
 Motor motor(12, 3, 9);
 
