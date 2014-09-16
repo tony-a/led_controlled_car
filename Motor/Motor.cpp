@@ -31,7 +31,7 @@ void Motor::stop() {
 	digitalWrite(_brake_pin, HIGH);
 }
 
-void Motor::release() {
+void Motor::release_brake() {
 	digitalWrite(_brake_pin, LOW);
 }
 

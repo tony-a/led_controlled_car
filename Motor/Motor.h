@@ -14,7 +14,7 @@ class Motor
 {
 	public:
 		Motor(int direction_pin, int speed_pin, int brake_pin);
-		void release();
+		void release_brake();
 		void move(char dir, int speed);
 		void stop();
 	private:
