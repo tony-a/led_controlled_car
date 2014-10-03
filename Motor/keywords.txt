@@ -1,0 +1,4 @@
+Motor	KEYWORD1
+move	KEYWORD2
+stop	KEYWORD2
+release_brake	KEYWORD2

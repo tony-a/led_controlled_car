@@ -8,7 +8,7 @@
 #define Motor_H
 
 
-#include "Arduino.h"
+//#include "Arduino.h"
 
 class Motor
 {
@@ -25,3 +25,4 @@ class Motor
 
 
 #endif
+
