@@ -53,45 +53,23 @@ void setup() {
 }
 
 void loop(void){
-
   radio.stopListening();                                    // First, stop listening so we can talk.
-  
-  printf("Now sending \n\r");
 
-  unsigned long time = micros();    // Take the time, and send it.  This will block until complete
-  int dir = 1; 
-   if (!radio.write( &dir, sizeof(int) )){  printf("failed.\n\r");  }
-      
-  radio.startListening();                                    // Now, continue listening
-  
-  unsigned long started_waiting_at = micros();               // Set up a timeout period, get the current microseconds
-  boolean timeout = false;                                   // Set up a variable to indicate if a response was received or not
-  
-  while ( ! radio.available() ){                             // While nothing is received
-    if (micros() - started_waiting_at > 200000 ){            // If waited longer than 200ms, indicate timeout and exit while loop
-        timeout = true;
-        break;
-    }      
-  }
-      
-  if ( timeout ){                                             // Describe the results
-      printf("Failed, response timed out.\n\r");
-  }else{
-      unsigned long got_time;         // Grab the response, compare, and send to debugging spew
-      int got_dir;
-      radio.read( &got_dir, sizeof(int) );
+  sensorValue1 = analogRead(lightPin1);
+  sensorValue2 = analogRead(lightPin2);
+  int dir = find_direction(sensorValue1, sensorValue2);
+  printf("Now sending %d. \n\r", dir);
 
-      // Spew it
-      printf("Sent %d, Got response %d. \n\r",dir,got_dir);
-  }
-
-  // Try again 1s later
-  delay(1000);
+  if (!radio.write( &dir, sizeof(int) )){  printf("failed.\n\r");  }
+  
+  // repeat measurement after half a second.
+  delay(500);
 }
 
 
-void find_direction(float sensorValue1, float sensorValue2){
+int find_direction(float sensorValue1, float sensorValue2){
   // return values: stop, forward, backward
+  int dir;
   int delta_to_stop = 60;
   float intensity_difference = sensorValue1 - sensorValue2;
   if(abs(intensity_difference) < delta_to_stop){
@@ -103,5 +81,6 @@ void find_direction(float sensorValue1, float sensorValue2){
   else {
     int dir = 2;
   }
-
+  
+  return dir;
 }
