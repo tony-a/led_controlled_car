@@ -31,41 +31,77 @@
         <hr>
 
         <section id="main_content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="idea" class="anchor" href="#idea"><span class="octicon octicon-link"></span></a>Idea</h3>
+<p>
+An attempt at controlling an RC car by drawing out a path using an LED on top of several photoresistors. 
+</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="parts-and-libraries" class="anchor" href="#parts-and-libraries"><span class="octicon octicon-link"></span></a>Parts & Libraries</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+Car hardware:
+<ul>
+  <li>Arduino Uno</li>
+  <li>Arduino Motor Shield S3</li>
+  <li>RF2fl01+ (as receiver)</li>
+</ul>
+
+Controller hardware:
+<ul>
+  <li>Arduino Leonardo</li>
+  <li>Photoresistor (x2)</li>
+  <li>RF2fl01+ (as transmitter)</li>
+</ul>
+
+Libraries:
+<ul>
+  <li>For the RF24 modules I used <a href="https://github.com/tmrh20/RF24">this library</a> by <a href="https://github.com/tmrh20" class="user-mention">@tmrh20</a>.
+  <li>For the Motor shield, I wrote my own (very basic) library; <a href="https://github.com/tony-a/led_controlled_car/tree/master/Motor">Link.</a>
+</ul>
+
+
 
 <h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a name="problems-encountered" class="anchor" href="#problems-encountered"><span class="octicon octicon-link"></span></a>Problems Encountered</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<ol type="1">
+  <li>Setting up RF24 with Leonardo requires different wiring than the Uno. <br>Spent a few days scratching my head before relaizing that.</li>
+  <li>The Motor Shield S3 uses pins 11, 12 and 13 on the arduino, which are also the ICSP pins. 
+but the ICSP pins are required by the RF24 shield.  I ended up bending the three pins up, and rewired pin-12 to Arduino pin-2 MODE=OUTPUT.</li>
+</ol>
+
+<img src="images/motor-shield-rewire.JPG" alt="Mountain View" style="width:300px;height:225px">
+<img src="images/icsp-extension-pins.JPG" alt="Mountain View2" style="width:300px;height:225px">
+<p></p>
+<h3>
+<a name="current-work" class="anchor" href="#current-work"><span class="octicon octicon-link"></span></a>Current Work</h3>
+<p>
+I'm currently adding turn functionality to the car by adding a third photoresistor.
+</p>
+
+<h3>
+<a name="future-modifications" class="anchor" href="#future-modifications"><span class="octicon octicon-link"></span></a>Future Modifications</h3>
+<ul>
+  <li>Use light intensity to control speed of car.</li>
+  <li>Add turn functionality.</li>
+  <li>Upgrade LED-pencil controller.</li>
+</ul>
+
+
+<h3>
+<a name="idea-motivation" class="anchor" href="#idea-motivation"><span class="octicon octicon-link"></span></a>Idea Motivation</h3>
+
+<p>An attempt at making a car follow me (more specifically to follow a hand above it.) <br>
+Turned into an attempt at making a car replicate my hand gesture. <br>
+Turned into a car replicating the path of an LED over several photoresistors. <br>
+</p>
         </section>
 
         <footer>
-          Led controlled car is maintained by <a href="https://github.com/tony-a">tony-a</a><br>
+          Led controlled car is maintained by <a href="https://github.com/tony-a">Tony Askar</a><br>
           This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
         </footer>
 
