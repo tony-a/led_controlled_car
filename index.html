@@ -50,16 +50,13 @@ An attempt at controlling an RC car by drawing out a path using an LED on top of
 <a name="parts-and-libraries" class="anchor" href="#parts-and-libraries"><span class="octicon octicon-link"></span></a>Parts & Libraries</h3>
 
 <div style="width: 100%; overflow: hidden;">
-    
-  <div style="width: 300px; float: left;"> 
-
-    <img src="images/car.JPG" alt="Mountain View" style="width:300px;height:225px">
+  <div style="margin-left: 35px; width: 300px; float: left;"> 
+    <img src="images/car.JPG" alt="Mountain View" style="width:225px;height:300px">
   </div>
 
   <div style="margin-left: 340px;"> 
     <p> </p>
     &nbsp 
-    <p></p>
     Car hardware:
     <ul>
       <li>Arduino Uno</li>
@@ -67,33 +64,44 @@ An attempt at controlling an RC car by drawing out a path using an LED on top of
       <li>nRF24L01+ (as receiver)</li>
     </ul>
   </div>
-
 </div>
+
 <p></p>
 
 <div style="width: 100%; overflow: hidden;">
-  <div style="margin-left: 25px; width: 300px; float: left;"> 
-    <img src="images/photo-controller.JPG" alt="Mountain View" style="width:250px;height:300px">
+  <div style="width: 300px; float: left;"> 
+    <img src="images/photoresistors.JPG" alt="Mountain View" style="width:300px;height:225px">
   </div>
 
   <div style="margin-left: 340px;"> 
     <p> </p>
+    &nbsp
     &nbsp 
-    &nbsp 
-    <p></p>
     Controller hardware:
     <ul>
       <li>Arduino Leonardo</li>
       <li>Photoresistor (x2)</li>
       <li>nRF24L01+ (as transmitter)</li>
-      <li>Fancy LED-wand I made.
-        <ul style="list-style-type:none">
-          <li size="6">I recommend using a supersonic screwdriver instead.</li>
-        </ul>
-      </li>
     </ul>
   </div>
+</div>
 
+<p> </p>
+
+
+<div style="width: 100%; overflow: hidden;">
+  <div style="margin-left: 35px; width: 300px; float: left;"> 
+    <img src="images/led-wand.JPG" alt="Mountain View" style="width:225px;height:300px">
+  </div>
+
+  <div style="margin-left: 340px;"> 
+    <p> </p>
+    &nbsp
+    &nbsp
+    <p> </p>
+    Fancy LED-wand I made. <br>
+    (I recommend using a supersonic screwdriver instead!!)
+  </div>
 </div>
 
 <p> </p>
@@ -123,8 +131,15 @@ Libraries:
 <h3>
 <a name="current-work" class="anchor" href="#current-work"><span class="octicon octicon-link"></span></a>Current Work</h3>
 <p>
-I'm currently adding turn functionality to the car by adding a third photoresistor.
+I'm currently adding turn functionality to the car by adding a third photoresistor. <br>
+By placing the three photoresistors into a T shape, I can use the top two to determine which way to turn. <br>
+Forward and backward directionality will be determined by the bottom sensor and the average of the top two.
 </p>
+<div style="margin-left: 180px;">
+<img src="images/3-photoresistors.JPG" alt="Mountain View" style="width:225px;height:300px">
+</div>
+
+<p></p>
 
 <h3>
 <a name="future-modifications" class="anchor" href="#future-modifications"><span class="octicon octicon-link"></span></a>Future Modifications</h3>
