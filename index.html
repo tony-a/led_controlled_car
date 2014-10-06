@@ -39,6 +39,13 @@ An attempt at controlling an RC car by drawing out a path using an LED on top of
 </p>
 
 
+
+<img src="images/car-motion.gif" alt="Mountain View" style="width:300px;height:225px">
+&nbsp 
+<img src="images/controller-motion.gif" alt="Mountain View" style="width:300px;height:225px">
+
+
+
 <h3>
 <a name="parts-and-libraries" class="anchor" href="#parts-and-libraries"><span class="octicon octicon-link"></span></a>Parts & Libraries</h3>
 
@@ -46,20 +53,25 @@ Car hardware:
 <ul>
   <li>Arduino Uno</li>
   <li>Arduino Motor Shield S3</li>
-  <li>RF2fl01+ (as receiver)</li>
+  <li>nRF24L01+ (as receiver)</li>
 </ul>
 
 Controller hardware:
 <ul>
   <li>Arduino Leonardo</li>
   <li>Photoresistor (x2)</li>
-  <li>RF2fl01+ (as transmitter)</li>
+  <li>nRF24L01+ (as transmitter)</li>
+  <li>Fancy LED-wand I made.
+    <ul style="list-style-type:none">
+      <li>I recommend using a supersonic screwdriver instead.</li>
+    </ul>
+  </li>
 </ul>
 
 Libraries:
 <ul>
   <li>For the RF24 modules I used <a href="https://github.com/tmrh20/RF24">this library</a> by <a href="https://github.com/tmrh20" class="user-mention">@tmrh20</a>.
-  <li>For the Motor shield, I wrote my own (very basic) library; <a href="https://github.com/tony-a/led_controlled_car/tree/master/Motor">Link.</a>
+  <li>For the Motor shield, I wrote my own (very basic) library, <a href="https://github.com/tony-a/led_controlled_car/tree/master/Motor">link.</a>
 </ul>
 
 
@@ -67,10 +79,12 @@ Libraries:
 <h3>
 <a name="problems-encountered" class="anchor" href="#problems-encountered"><span class="octicon octicon-link"></span></a>Problems Encountered</h3>
 
-<ol type="1">
-  <li>Setting up RF24 with Leonardo requires different wiring than the Uno. <br>Spent a few days scratching my head before relaizing that.</li>
-  <li>The Motor Shield S3 uses pins 11, 12 and 13 on the arduino, which are also the ICSP pins. 
-but the ICSP pins are required by the RF24 shield.  I ended up bending the three pins up, and rewired pin-12 to Arduino pin-2 MODE=OUTPUT.</li>
+<ol type="1" >
+  <li>Setting up the RF24 on the Leonardo board requires different wiring than the Uno. <br>Spent a few days scratching my head before relaizing that. Basically you have to use the 6 separate ICSP pins on the board, rather than pins 11, 12 and 13 as most docs say. <br>
+    <a href="http://arduinoexamples.wordpress.com/2012/11/11/nrf24l01-com-arduino-leonardo-nrf24l01-with-arduino-leonardo">This site</a> has good a diagram showing the proper connections to the ICSP pins. </li><br>
+  <li>The Motor Shield uses pins 11, 12 and 13 on the arduino, which are the ICSP pins used by RF24 module (as mentioned above). <br>
+    The problem is discussed in <a href="http://arduino.stackexchange.com/questions/3892/motor-shield-and-wireless-transceiver-compete-for-same-pins">this stackexchange</a>. I ended up bending the three pins up (on the motor shield), and rewired pin-12 to Arduino pin-2, MODE=OUTPUT, as seen below. <br>
+    I also used 90-degrees exentsion pins to access the ICSP pins and hook up the RF24 piece (picture on the right).</li>
 </ol>
 
 <img src="images/motor-shield-rewire.JPG" alt="Mountain View" style="width:300px;height:225px">
@@ -98,7 +112,15 @@ I'm currently adding turn functionality to the car by adding a third photoresist
 Turned into an attempt at making a car replicate my hand gesture. <br>
 Turned into a car replicating the path of an LED over several photoresistors. <br>
 </p>
-        </section>
+  
+<h3>
+<a name="conclusion" class="anchor" href="#conclusion"><span class="octicon octicon-link"></span></a>Conclusion</h3>
+<p>
+Overall it was a fun learning experience. Wrote my first library. <br>
+The car doesn't do much yet, maybe I'll add flying functionality next.
+</p>
+
+  </section>
 
         <footer>
           Led controlled car is maintained by <a href="https://github.com/tony-a">Tony Askar</a><br>
