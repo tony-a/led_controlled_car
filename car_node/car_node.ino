@@ -20,6 +20,8 @@
 #include <Motor.h>
 
 Motor motor(2, 3, 9);
+Motor turnMotor(13, 10, 8);
+
 
 // Hardware configuration: Set up nRF24L01 radio on SPI bus plus pins 7 & 8 
 RF24 radio(5, 6);
@@ -28,10 +30,8 @@ byte addresses[][6] = {"1Node","2Node"};
 
 void setup() {
 
-  Serial.begin(57600);
-  printf_begin();
-  printf("\n\rRF24/examples/GettingStarted/\n\r");
-  printf("*** PRESS 'T' to begin transmitting to the other node\n\r");
+//  Serial.begin(57600);
+  // printf_begin();
 
   // Setup and configure rf radio
   radio.begin();                          // Start up the radio
@@ -41,9 +41,9 @@ void setup() {
   radio.openReadingPipe(1,addresses[0]);
   
   radio.startListening();                 // Start listening
-  radio.printDetails();                   // Dump the configuration of the rf unit for debugging
+  // radio.printDetails();                   // Dump the configuration of the rf unit for debugging
 
-  printf("*** CHANGING TO RECEIVE ROLE ***\n\r");
+  // printf("*** CHANGING TO RECEIVE ROLE ***\n\r");
   radio.openWritingPipe(addresses[1]);
   radio.openReadingPipe(1,addresses[0]);
 
@@ -56,8 +56,17 @@ void loop(void){
     while (radio.available()) {            // While there is data ready
       radio.read( &dir, sizeof(int) );             // Get the payload
     }    
-    printf("Got the following direction: %d \n\r",got_dir);
-    motor.move(dir, 100);
+    // printf("Got the following direction: %d \n\r",dir);
+    
+    int direction = dir/10;
+    int turn_direction = dir%10;
+    
+    motor.move(direction, 130);
+    turnMotor.turn(turn_direction);
+    
+    
+    // printf("direction : %d \n\r",direction);
+    // printf("turn: %d \n\r",turn_direction);
   }
 
   
