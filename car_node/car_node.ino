@@ -20,7 +20,7 @@
 #include <Motor.h>
 
 Motor motor(2, 3, 9);
-Motor turnMotor(13, 10, 8);
+Motor turnMotor(4, 10, 8);
 
 
 // Hardware configuration: Set up nRF24L01 radio on SPI bus plus pins 7 & 8 
@@ -30,7 +30,7 @@ byte addresses[][6] = {"1Node","2Node"};
 
 void setup() {
 
-//  Serial.begin(57600);
+  Serial.begin(57600);
   // printf_begin();
 
   // Setup and configure rf radio
@@ -46,6 +46,8 @@ void setup() {
   // printf("*** CHANGING TO RECEIVE ROLE ***\n\r");
   radio.openWritingPipe(addresses[1]);
   radio.openReadingPipe(1,addresses[0]);
+  turnMotor.turn(0);
+
 
 }
 
@@ -64,7 +66,10 @@ void loop(void){
     motor.move(direction, 130);
     turnMotor.turn(turn_direction);
     
-    
+    Serial.println(dir);
+    Serial.println(direction);
+    Serial.println(turn_direction);
+    Serial.println("---------------------");
     // printf("direction : %d \n\r",direction);
     // printf("turn: %d \n\r",turn_direction);
   }

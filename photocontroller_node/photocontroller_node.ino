@@ -28,7 +28,7 @@ double valueY;
 
 
 void setup(){
-//  Serial.begin(9600);
+  Serial.begin(57600);
   
   // Setup and configure rf radio
   radio.begin();                          // Start up the radio
@@ -50,47 +50,54 @@ void loop(){
   valueX2 = analogRead(sensorX2);  // Top right corner of T
   valueY = analogRead(sensorY);    // Bottom of T
   
-//  Serial.print("sensor X1: ");
-//  Serial.println(valueX1);
-//  Serial.print("sensor X2: ");
-//  Serial.println(valueX2);
-//  Serial.print("sensor Y: ");
-//  Serial.println(valueY);
-//  Serial.println();
+  Serial.print("sensor X1: ");
+  Serial.println(valueX1);
+  Serial.print("sensor X2: ");
+  Serial.println(valueX2);
+  Serial.print("sensor Y: ");
+  Serial.println(valueY);
+  Serial.println();
 
   double top_average = (valueX1 + valueX2)/2.0;
-//  Serial.print("average: ");
-//  Serial.println(top_average);
+  Serial.print("average: ");
+  Serial.println(top_average);
   
   int f_dir = find_direction(valueY, top_average);
   int t_dir = find_horizontal_direction(valueX1, valueX2);
+  Serial.print("foward direction: ");
+  Serial.println(f_dir);
+  Serial.print("side direction: ");
+  Serial.println(t_dir);
+  
   
   int dir_to_send = (f_dir * 10) + t_dir;
+  Serial.println("-----------------");  
+  Serial.println(dir_to_send);
   
   radio.write( &dir_to_send, sizeof(int) );
 
   delay(1000);
-//  Serial.println("-----------------");
+  Serial.println("----------------------------------------------------------");
 
 }
 
 int find_direction(float sensorValue1, float sensorValue2){
   // return values: stop, forward, backward
   int return_dir;
-  int delta_to_stop = 60;
+  int delta_to_stop = 30;
   float intensity_difference = sensorValue1 - sensorValue2;
   
   if(abs(intensity_difference) < delta_to_stop){
-//    Serial.println("stop");
-    return_dir = 0;
+    Serial.println("stop");
+    return_dir = 1;
   }
   else if (sensorValue1 > sensorValue2){
-//    Serial.println("forward");
-    return_dir = 1;  
+    Serial.println("forward");
+    return_dir = 2;  
   }
   else {
-//    Serial.println("backward");
-    return_dir = 2;  
+    Serial.println("backward");
+    return_dir = 3;  
   }  
   return return_dir;
 }
@@ -103,15 +110,15 @@ int find_horizontal_direction(double valueX1, double valueX2){
   
   if (abs(intensity_difference) < delta_to_go_straight) {
 //    Serial.println("going straight");
-    turn_dir = 0;
+    turn_dir = 1;
   }
   else if (valueX1 < valueX2) {
 //    Serial.println("turning left");
-    turn_dir = 1;
+    turn_dir = 2;
   }
   else {
 //    Serial.println("turning right");
-    turn_dir = 2;
+    turn_dir = 3;
   }
   return turn_dir;
 }
