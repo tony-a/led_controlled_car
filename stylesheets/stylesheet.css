@@ -165,6 +165,18 @@ a.button span {
   margin-right: 0;
 }
 
+.main-image {
+  /*position: absolute;*/
+  /*position: fixed;*/
+  /*top: 50%;*/
+  left: 50%;
+  margin-left: -(X/2)px;
+  /*margin-top: -(Y/2)px;*/
+  width: 400px;
+  height: 300px;
+  margin-left: 250
+}
+
 code, pre {
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal;
   color: #222;

@@ -35,30 +35,37 @@
 <h3>
 <a name="idea" class="anchor" href="#idea"><span class="octicon octicon-link"></span></a>Idea</h3>
 <p>
-An attempt at controlling an RC car by drawing out a path using an LED on top of several photoresistors. 
+  An attempt at controlling an RC car by drawing out a path using an LED on top of several photoresistors. <br>
+  <br>
+
+  The main work went into the controller piece, which used three photoresistors placed in a 'T' shape. I measured light intensity over them to determine the motion of the car. The top two photoresistors calculated the left-right directionality. While the average of the top two compared with the bottom resistor determined forward-backward movement.
+  <br>
+  <br>
+
+  Source code and Arduino sketchs can be found on <a href="https://github.com/tony-a/led_controlled_car">the project's github page.</a>
 </p>
 
 
-
-<img src="images/car-motion.gif" alt="Mountain View" style="width:300px;height:225px">
-&nbsp 
-<img src="images/controller-motion.gif" alt="Mountain View" style="width:300px;height:225px">
+<img style="margin-left: 80px;" src="images/car3.gif" alt="Mountain View" class="main-image" >
 
 
 &nbsp 
+<p></p>
+
 <h3>
 <a name="parts-and-libraries" class="anchor" href="#parts-and-libraries"><span class="octicon octicon-link"></span></a>Parts & Libraries</h3>
 
 <div style="width: 100%; overflow: hidden;">
-  <div style="margin-left: 35px; width: 300px; float: left;"> 
-    <img src="images/car.JPG" alt="Mountain View" style="width:225px;height:300px">
+  <div style="margin-left: 15px; width: 390px; float: left;"> 
+    <img src="images/car2.JPG" alt="Mountain View" style="width:350px;height:269px">
   </div>
 
   <div style="margin-left: 340px;"> 
     <p> </p>
     &nbsp 
-    Car hardware:
+    <strong>Car hardware:</strong>
     <ul>
+      <li>Stripped down RC car case</li>
       <li>Arduino Uno</li>
       <li>Arduino Motor Shield S3</li>
       <li>nRF24L01+ (as receiver)</li>
@@ -69,18 +76,19 @@ An attempt at controlling an RC car by drawing out a path using an LED on top of
 <p></p>
 
 <div style="width: 100%; overflow: hidden;">
-  <div style="width: 300px; float: left;"> 
-    <img src="images/photoresistors.JPG" alt="Mountain View" style="width:300px;height:225px">
+  <div style="width: 430px; float: left;"> 
+    <img src="images/3-photoresistors.JPG" alt="Mountain View" style="width:190px;height:300px">
+    <img src="images/transmitter.JPG" alt="Mountain View" style="width:190px;height:300px">
+
   </div>
 
   <div style="margin-left: 340px;"> 
     <p> </p>
     &nbsp
-    &nbsp 
-    Controller hardware:
+    <strong>Controller hardware:</strong>
     <ul>
       <li>Arduino Leonardo</li>
-      <li>Photoresistor (x2)</li>
+      <li>Photoresistor (x3)</li>
       <li>nRF24L01+ (as transmitter)</li>
     </ul>
   </div>
@@ -90,8 +98,8 @@ An attempt at controlling an RC car by drawing out a path using an LED on top of
 
 
 <div style="width: 100%; overflow: hidden;">
-  <div style="margin-left: 35px; width: 300px; float: left;"> 
-    <img src="images/led-wand.JPG" alt="Mountain View" style="width:225px;height:300px">
+  <div style="margin-left: 15px; width: 390px; float: left;"> 
+    <img src="images/led-wand.JPG" alt="Mountain View" style="width:350px;height:269px">
   </div>
 
   <div style="margin-left: 340px;"> 
@@ -99,8 +107,8 @@ An attempt at controlling an RC car by drawing out a path using an LED on top of
     &nbsp
     &nbsp
     <p> </p>
-    Fancy LED-wand I made. <br>
-    (I recommend using a supersonic screwdriver instead!!)
+    <strong>Fancy LED-wand I made. </strong><br>
+    <em>I recommend using a sonic screwdriver instead!</em>
   </div>
 </div>
 
@@ -118,44 +126,57 @@ Libraries:
 <a name="problems-encountered" class="anchor" href="#problems-encountered"><span class="octicon octicon-link"></span></a>Problems Encountered</h3>
 
 <ol type="1" >
-  <li>Setting up the RF24 on the Leonardo board requires different wiring than the Uno. <br>Spent a few days scratching my head before relaizing that. Basically you have to use the 6 separate ICSP pins on the board, rather than pins 11, 12 and 13 as most docs say. <br>
+  <li>Setting up the RF24 module on the Leonardo board requires different wiring than the Uno. <br>I spent a few days scratching my head before realizing that. Basically you have to use the 6 separate ICSP pins on the board, rather than pins 11, 12 and 13 as most docs say. <br>
     <a href="http://arduinoexamples.wordpress.com/2012/11/11/nrf24l01-com-arduino-leonardo-nrf24l01-with-arduino-leonardo">This site</a> has good a diagram showing the proper connections to the ICSP pins. </li><br>
   <li>The Motor Shield uses pins 11, 12 and 13 on the arduino, which are the ICSP pins used by RF24 module (as mentioned above). <br>
-    The problem is discussed in <a href="http://arduino.stackexchange.com/questions/3892/motor-shield-and-wireless-transceiver-compete-for-same-pins">this stackexchange</a>. I ended up bending the three pins up (on the motor shield), and rewired pin-12 to Arduino pin-2, MODE=OUTPUT, as seen below. <br>
-    I also used 90-degrees exentsion pins to access the ICSP pins and hook up the RF24 piece (picture on the right).</li>
-</ol>
+    The problem is discussed in <a href="http://arduino.stackexchange.com/questions/3892/motor-shield-and-wireless-transceiver-compete-for-same-pins">this stackexchange</a>. I ended up bending the three pins up (on the motor shield), and rewired pins 11, 12 and 13 to Arduino pins 2, x and y respectivly (MODE=OUTPUT), as seen below. <br>
+    
+    I also used 90-degree exentsion pins to access the ICSP pins and hook up the RF24 piece (picture on the right).</li>
+<br>
 
 <img src="images/motor-shield-rewire.JPG" alt="Mountain View" style="width:300px;height:225px">
 <img src="images/icsp-extension-pins.JPG" alt="Mountain View2" style="width:300px;height:225px">
+
 <p></p>
+
+  <li>'Serial Port' grayed-out or not available through the Arduino IDE. <br> 
+I was testing the photoresistors by printing out its readings over serial with baud rate set to 9600.<br>
+I then added code excerpts from the RF24 <a href="https://github.com/TMRh20/RF24/blob/master/examples/GettingStarted/GettingStarted.ino">getting-started example</a>, to integrate the wirless transmitter. That code uses serial communication, but with a baud rate of 57600, this caused some interference, it grayed out the Serial Port option in the IDE and I wasn't able to upload any sketches after that. <br> 
+
+
+There are a lot of suggestions on how to fix this issue online, the one I found to work for me was uploading an empty sketch and clicking the reset button on the board right after hitting Upload. </li>
+</ol>
+
+<p></p>
+
+
 <h3>
-<a name="current-work" class="anchor" href="#current-work"><span class="octicon octicon-link"></span></a>Current Work</h3>
-<p>
-I'm currently adding turn functionality to the car by adding a third photoresistor. <br>
-By placing the three photoresistors into a T shape, I can use the top two to determine which way to turn. <br>
-Forward and backward directionality will be determined by the bottom sensor and the average of the top two.
-</p>
-<div style="margin-left: 180px;">
-<img src="images/3-photoresistors.JPG" alt="Mountain View" style="width:225px;height:300px">
-</div>
+<a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>Notes</h3>
+  <ul>
+    <li>The signal I sent across was made up of two digits ranging from "11" to "33". The first digit translated to 1=stop, 2=forward, 3=backward. The second digit controlled direction: 1=straight, 2=left, 3=right.</li>
+    <li>Make sure to connect the photoresistors in parallel. Connecting them in series will result in identical reading on all three. </li>
+    <li>Make sure to use a 9-volt battery, or external power source, when working with the Arduino + Motor shield combo. </li>
+  </ul>
+  
 
 <p></p>
 
 <h3>
 <a name="future-modifications" class="anchor" href="#future-modifications"><span class="octicon octicon-link"></span></a>Future Modifications</h3>
 <ul>
+  <li><strike>Add turn functionality.</strike> Now Complete!</li> 
   <li>Use light intensity to control speed of car.</li>
-  <li>Add turn functionality.</li>
   <li>Upgrade LED-pencil controller.</li>
+  <li>I was told to add real car noises, so I'll list that as well :)
 </ul>
 
 
 <h3>
 <a name="idea-motivation" class="anchor" href="#idea-motivation"><span class="octicon octicon-link"></span></a>Idea Motivation</h3>
 
-<p>An attempt at making a car follow me (more specifically to follow a hand above it.) <br>
-Turned into an attempt at making a car replicate my hand gesture. <br>
-Turned into a car replicating the path of an LED over several photoresistors. <br>
+<p>An attempt to make a car follow my hand.<br>
+Turned into an attempt to make a car replicate my hand motion in front of 3 Ultrasonic sensors. <br>
+Turned into a car replicating the path of an LED over 3 photoresistors. <br>
 </p>
   
 <h3>
